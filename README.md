@@ -104,14 +104,29 @@ cd url-shortener-agentic
 
 ## How to Run
 
+`shortener-service` (the reference product) and `agent-orchestrator` (the orchestration layer) are two **separate concerns**, and running one is not a substitute for the other. The sections below are intentionally kept separate so it's unambiguous which application you're interacting with at each step.
+
+### 1. Running the Reference Product
+
+`shortener-service` is the **baseline product** — the real, already-working URL shortener that exists *before* any agentic run touches it. It runs on **port 8080**.
+
 ```bash
-./gradlew :shortener-service:bootRun       # product, on :8080
+./gradlew :shortener-service:bootRun       # baseline product, on :8080
+```
+
+This is the application the orchestrator reads and reasons about: `ArchitectureAgent` inspects its real source tree, and every orchestrator run starts by copying it wholesale into an isolated workspace before making any changes (see [`docs/01-Architecture.md`](docs/01-Architecture.md)). **Start this first, and normally keep it running** whenever you use the orchestrator — it is the baseline every run is evaluated against, not something the orchestrator's own runs execute directly.
+
+### 2. Running the Orchestrator
+
+`agent-orchestrator` runs on **port 8081**. It generates and validates code entirely inside an isolated per-run workspace — never against `shortener-service` on :8080 directly.
+
+```bash
 ./gradlew :agent-orchestrator:bootRun      # orchestrator, on :8081
 ```
 
 > **IntelliJ users:** always launch via the Gradle task above (or the checked-in `.run/OrchestratorApplication.run.xml` configuration), not a bare `java` run on `OrchestratorApplication` — Gradle sets the module working directory that `app.codebase.repo-root` depends on.
 
-Interact with the orchestrator via its REST API (Postman, curl, or the scenario scripts below):
+Interact with it via its REST API (Postman, curl, or the scenario scripts below):
 
 | Method | Path | Purpose |
 |---|---|---|
@@ -146,6 +161,26 @@ Interact with the orchestrator via its REST API (Postman, curl, or the scenario 
 ```json
 { "approvedBy": "reviewer", "notes": "looks good" }
 ```
+
+### 3. Verifying the AI-Generated Application (Optional)
+
+Once a run reaches `COMPLETED`, the code it actually produced — written by `ImplementationAgent` and validated by `TestAgent`'s real Gradle test run — is available at:
+
+```
+run-artifacts/<runId>/workspace/shortener-service
+```
+
+This is **not** the reference product from step 1; it's the isolated workspace copy the orchestrator generated and tested for that specific run (see [`docs/01-Architecture.md`](docs/01-Architecture.md) for the isolation model). Reading the run's audit log (`GET /runs/{id}/audit`) and `SUMMARY.md` is normally sufficient to confirm what happened — this step is for reviewers who additionally want to exercise the generated REST APIs themselves (e.g. `POST /shorten`, the redirect, the analytics/stats endpoint):
+
+1. Stop the reference `shortener-service` from step 1 — it and the generated workspace copy both default to port 8080 and would conflict.
+2. Start the generated copy instead:
+   ```bash
+   cd run-artifacts/<runId>/workspace
+   ./gradlew :shortener-service:bootRun
+   ```
+3. Exercise its endpoints exactly as you would the reference product.
+
+**This step is entirely optional.** It is not required to evaluate a run — `TestAgent` already runs the full real test suite against this exact code as part of the workflow itself. It exists purely for manual, hands-on verification of the generated code, if you want it.
 
 ## Demo Scenarios
 
