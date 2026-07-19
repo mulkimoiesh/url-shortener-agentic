@@ -221,19 +221,33 @@ These artifacts show the actual execution of the Greenfield, Brownfield, and Amb
 
 The screenshots and video are provided as supplementary evidence only. Reviewers can reproduce the same results by following the execution steps described in this README.
 
-**Greenfield** — [`docs/images/Greenfield/`](docs/images/Greenfield/)
-- [greenFiled_01.png](docs/images/Greenfield/greenFiled_01.png), [greenfield_02.png](docs/images/Greenfield/greenfield_02.png), [greenField_03.png](docs/images/Greenfield/greenField_03.png), [GreenFiled_05.png](docs/images/Greenfield/GreenFiled_05.png), [greenfield_06.png](docs/images/Greenfield/greenfield_06.png), [greenfield_07.png](docs/images/Greenfield/greenfield_07.png)
-- [GreenField_Complete_output.mp4](docs/images/Greenfield/GreenField_Complete_output.mp4) — full workflow demo video
+```
+docs/images/
+├── Greenfield/                       build-from-scratch workflow
+│   ├── greenFiled_01.png
+│   ├── greenfield_02.png
+│   ├── greenField_03.png
+│   ├── GreenFiled_05.png
+│   ├── greenfield_06.png
+│   ├── greenfield_07.png
+│   └── GreenField_Complete_output.mp4    full workflow demo video
+├── BrownField/                       real change against the existing codebase
+│   ├── brownfiled_01.png
+│   ├── brownfield_02.png
+│   ├── brownfield_03.png
+│   └── BrownField_complet_output.mp4     full workflow demo video
+├── Ambigous/                          ambiguity surfaced -> clarified -> resolved
+│   ├── Ambigous_01.png
+│   ├── Ambigous_02.png
+│   └── Ambigous_03.png
+└── GoverenceDemo/                    bounded retry-loop + guardrail-block demonstration
+    ├── demo_01.png
+    ├── demo_02.png
+    ├── demo_03.png
+    └── demo_04.png
+```
 
-**Brownfield** — [`docs/images/BrownField/`](docs/images/BrownField/)
-- [brownfiled_01.png](docs/images/BrownField/brownfiled_01.png), [brownfield_02.png](docs/images/BrownField/brownfield_02.png), [brownfield_03.png](docs/images/BrownField/brownfield_03.png)
-- [BrownField_complet_output.mp4](docs/images/BrownField/BrownField_complet_output.mp4) — full workflow demo video
-
-**Ambiguous** — [`docs/images/Ambigous/`](docs/images/Ambigous/)
-- [Ambigous_01.png](docs/images/Ambigous/Ambigous_01.png), [Ambigous_02.png](docs/images/Ambigous/Ambigous_02.png), [Ambigous_03.png](docs/images/Ambigous/Ambigous_03.png)
-
-**Governance Demo** — [`docs/images/GoverenceDemo/`](docs/images/GoverenceDemo/)
-- [demo_01.png](docs/images/GoverenceDemo/demo_01.png), [demo_02.png](docs/images/GoverenceDemo/demo_02.png), [demo_03.png](docs/images/GoverenceDemo/demo_03.png), [demo_04.png](docs/images/GoverenceDemo/demo_04.png)
+Browse the full folder on GitHub at [`docs/images/`](docs/images/), or jump straight to a subfolder: [Greenfield](docs/images/Greenfield/), [BrownField](docs/images/BrownField/), [Ambigous](docs/images/Ambigous/), [GoverenceDemo](docs/images/GoverenceDemo/).
 
 ## Documentation Links
 
