@@ -116,6 +116,23 @@ cd url-shortener-agentic
 
 This is the application the orchestrator reads and reasons about: `ArchitectureAgent` inspects its real source tree, and every orchestrator run starts by copying it wholesale into an isolated workspace before making any changes (see [`docs/01-Architecture.md`](docs/01-Architecture.md)). **Start this first, and normally keep it running** whenever you use the orchestrator — it is the baseline every run is evaluated against, not something the orchestrator's own runs execute directly.
 
+**Example requests** (same payloads work against a generated workspace copy too — see §3):
+
+```
+POST http://localhost:8080/api/v1/shorten
+Content-Type: application/json
+
+{
+  "longUrl": "https://example.com/some/very/long/path",
+  "expiresInSeconds": 3600
+}
+```
+
+```
+GET http://localhost:8080/{code}
+```
+Use the `code` from the shorten response above in place of `{code}` — this redirects (302) to the original `longUrl`.
+
 ### 2. Running the Orchestrator
 
 `agent-orchestrator` runs on **port 8081**. It generates and validates code entirely inside an isolated per-run workspace — never against `shortener-service` on :8080 directly.
