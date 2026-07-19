@@ -213,6 +213,28 @@ cd scenarios
 
 Each script prints the run's full state, audit log, and metrics at every step. See [`docs/03-Workflow-Scenarios.md`](docs/03-Workflow-Scenarios.md) for real, evidenced run excerpts of all four.
 
+## Demo & Execution Evidence
+
+To make the review process easier, I have included screenshots of successful local executions together with a short demonstration video under the `docs/images/` directory.
+
+These artifacts show the actual execution of the Greenfield, Brownfield, and Ambiguous workflows, including workspace generation, testing, guardrails, documentation, and final release approval, as well as the governance demo's bounded-retry mechanic.
+
+The screenshots and video are provided as supplementary evidence only. Reviewers can reproduce the same results by following the execution steps described in this README.
+
+**Greenfield** — [`docs/images/Greenfield/`](docs/images/Greenfield/)
+- [greenFiled_01.png](docs/images/Greenfield/greenFiled_01.png), [greenfield_02.png](docs/images/Greenfield/greenfield_02.png), [greenField_03.png](docs/images/Greenfield/greenField_03.png), [GreenFiled_05.png](docs/images/Greenfield/GreenFiled_05.png), [greenfield_06.png](docs/images/Greenfield/greenfield_06.png), [greenfield_07.png](docs/images/Greenfield/greenfield_07.png)
+- [GreenField_Complete_output.mp4](docs/images/Greenfield/GreenField_Complete_output.mp4) — full workflow demo video
+
+**Brownfield** — [`docs/images/BrownField/`](docs/images/BrownField/)
+- [brownfiled_01.png](docs/images/BrownField/brownfiled_01.png), [brownfield_02.png](docs/images/BrownField/brownfield_02.png), [brownfield_03.png](docs/images/BrownField/brownfield_03.png)
+- [BrownField_complet_output.mp4](docs/images/BrownField/BrownField_complet_output.mp4) — full workflow demo video
+
+**Ambiguous** — [`docs/images/Ambigous/`](docs/images/Ambigous/)
+- [Ambigous_01.png](docs/images/Ambigous/Ambigous_01.png), [Ambigous_02.png](docs/images/Ambigous/Ambigous_02.png), [Ambigous_03.png](docs/images/Ambigous/Ambigous_03.png)
+
+**Governance Demo** — [`docs/images/GoverenceDemo/`](docs/images/GoverenceDemo/)
+- [demo_01.png](docs/images/GoverenceDemo/demo_01.png), [demo_02.png](docs/images/GoverenceDemo/demo_02.png), [demo_03.png](docs/images/GoverenceDemo/demo_03.png), [demo_04.png](docs/images/GoverenceDemo/demo_04.png)
+
 ## Documentation Links
 
 Detailed engineering documentation lives in [`docs/`](docs/):
