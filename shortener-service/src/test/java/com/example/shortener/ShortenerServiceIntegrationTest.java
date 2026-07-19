@@ -59,6 +59,11 @@ class ShortenerServiceIntegrationTest {
 
     @Test
     void expiredShortUrlIsTreatedAsNotFound() {
+        // expiresInSeconds must stay negative: it must already be in the past
+        // (now + (-1s) < now) so this assertion holds regardless of how much
+        // time elapses between creation and the resolve call below. A
+        // positive value here is a different, unexpired timestamp and will
+        // make this test fail intermittently or outright.
         ShortenResponse created = shortenerService.createShortUrl(new ShortenRequest("https://example.com/expiring", -1));
 
         assertThrows(ShortUrlNotFoundException.class,

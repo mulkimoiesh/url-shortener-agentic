@@ -39,11 +39,20 @@ public class ImplementationPromptBuilder {
             If any files are listed under "Existing TEST files impacted by
             the production changes above", those tests reference code you
             are changing and may no longer compile or pass (e.g. a
-            constructor call whose signature you changed). Fix ONLY what is
-            necessary to keep each one compiling and passing - preserve its
-            existing test intent, assertions, and coverage. Do not delete or
-            weaken a test to make it pass, and do not touch any test file
-            not listed there.
+            constructor call whose signature you changed). Fix ONLY the
+            compile-breaking call sites: when a method or constructor gained
+            new parameters, ADD the new argument(s) with a neutral value
+            (e.g. null) and leave every OTHER existing argument's value
+            completely unchanged - do not renumber, reorder, or alter the
+            value of any argument that already compiled before your change,
+            even if a different value looks equivalent or "cleaner". A
+            test's existing numeric/string literals (timeouts, expiry
+            offsets, counts, thresholds, etc.) are load-bearing for its
+            assertions - changing one silently breaks the test's actual
+            intent even though the file still compiles and even though you
+            were not asked to touch that value. Do not delete or weaken a
+            test to make it pass, and do not touch any test file not listed
+            there.
 
             Respond with ONLY valid JSON, no markdown fences, no commentary:
             {
