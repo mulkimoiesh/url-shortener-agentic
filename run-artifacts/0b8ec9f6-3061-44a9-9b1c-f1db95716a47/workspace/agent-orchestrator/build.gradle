@@ -1,0 +1,30 @@
+plugins {
+    id 'org.springframework.boot'
+    id 'java'
+}
+
+description = 'Agentic SDLC orchestration layer: graph engine + agents that build/evolve shortener-service.'
+
+ext {
+    springAiVersion = '1.1.8'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.ai:spring-ai-starter-model-anthropic'
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootJar {
+    archiveFileName = 'agent-orchestrator.jar'
+}

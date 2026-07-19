@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: agent-orchestrator
+  ai:
+    anthropic:
+      api-key: ${ANTHROPIC_API_KEY:}
+      chat:
+        options:
+          model: claude-sonnet-4-6
+          max-tokens: 4000
+    openai:
+      # Groq speaks the OpenAI API shape - point base-url at Groq and use a Groq key here.
+      api-key: ${GROQ_API_KEY:}
+      base-url: https://api.groq.com/openai
+      chat:
+        options:
+          model: llama-3.3-70b-versatile
+          temperature: 0.2
+
+app:
+  llm:
+    # mock      -> canned deterministic responses, no API calls, safe to demo freely
+    # anthropic -> real Claude calls via Spring AI, requires ANTHROPIC_API_KEY
+    # groq      -> real Groq calls via Spring AI's OpenAI client, requires GROQ_API_KEY
+    #
+    # NOTE: this only selects which LLM answers. It no longer controls where
+    # files are written - every run always writes into its own isolated
+    # workspace (run-artifacts/{runId}/workspace/), regardless of provider.
+    # The live shortener-service module is only touched by an explicit
+    # POST /runs/{id}/apply call after a run reaches COMPLETED.
+    mode: groq
+  codebase:
+    # relative path from agent-orchestrator's working directory to the repo root
+    # (shortener-service and run-artifacts are both resolved from here)
+    repo-root: ..

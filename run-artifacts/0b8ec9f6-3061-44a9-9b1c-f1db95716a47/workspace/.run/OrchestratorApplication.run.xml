@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="OrchestratorApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="url-shortener-agentic.agent-orchestrator.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.orchestrator.OrchestratorApplication" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/agent-orchestrator" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
